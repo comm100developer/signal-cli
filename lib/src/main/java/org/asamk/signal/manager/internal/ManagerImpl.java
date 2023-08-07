@@ -342,7 +342,7 @@ public class ManagerImpl implements Manager {
             String deviceName = d.getName();
             if (deviceName != null) {
                 try {
-                    deviceName = DeviceNameUtil.decryptDeviceName(deviceName, identityKey);
+                    deviceName = deviceName;// DeviceNameUtil.decryptDeviceName(deviceName, identityKey);
                 } catch (IOException e) {
                     logger.debug("Failed to decrypt device name, maybe plain text?", e);
                 }
