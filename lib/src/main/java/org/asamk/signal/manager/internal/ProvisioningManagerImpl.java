@@ -127,7 +127,7 @@ public class ProvisioningManagerImpl implements ProvisioningManager {
 
         var encryptedDeviceName = deviceName == null
                 ? null
-                : DeviceNameUtil.encryptDeviceName(deviceName, ret.getAciIdentity().getPrivateKey());
+                : deviceName; //DeviceNameUtil.encryptDeviceName(deviceName, ret.getAciIdentity().getPrivateKey());
 
         logger.debug("Finishing new device registration");
         var deviceId = accountManager.finishNewDeviceRegistration(ret.getProvisioningCode(),
