@@ -1,6 +1,6 @@
 name: signal-cli CI
-
 on:
+  workflow_dispatch:
   push:
     branches:
       - '**'
