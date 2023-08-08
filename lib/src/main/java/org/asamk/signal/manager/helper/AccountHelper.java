@@ -21,14 +21,15 @@ import org.signal.libsignal.usernames.Username;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.whispersystems.signalservice.api.account.ChangePhoneNumberRequest;
-import org.whispersystems.signalservice.api.push.ACI;
-import org.whispersystems.signalservice.api.push.PNI;
+import org.whispersystems.signalservice.api.push.ServiceId.ACI;
+import org.whispersystems.signalservice.api.push.ServiceId.PNI;
 import org.whispersystems.signalservice.api.push.ServiceIdType;
 import org.whispersystems.signalservice.api.push.SignedPreKeyEntity;
 import org.whispersystems.signalservice.api.push.exceptions.AlreadyVerifiedException;
 import org.whispersystems.signalservice.api.push.exceptions.AuthorizationFailedException;
 import org.whispersystems.signalservice.api.push.exceptions.DeprecatedVersionException;
 import org.whispersystems.signalservice.api.util.DeviceNameUtil;
+import org.whispersystems.signalservice.api.util.UuidUtil;
 import org.whispersystems.signalservice.internal.push.KyberPreKeyEntity;
 import org.whispersystems.signalservice.internal.push.OutgoingPushMessage;
 import org.whispersystems.util.Base64UrlSafe;
@@ -101,8 +102,8 @@ public class AccountHelper {
     public void checkWhoAmiI() throws IOException {
         final var whoAmI = dependencies.getAccountManager().getWhoAmI();
         final var number = whoAmI.getNumber();
-        final var aci = ACI.parseOrNull(whoAmI.getAci());
-        final var pni = PNI.parseOrNull(whoAmI.getPni());
+        final var aci = ACI.parseOrThrow(whoAmI.getAci());
+        final var pni = PNI.from(UuidUtil.parseOrThrow(whoAmI.getPni()));
         if (number.equals(account.getNumber()) && aci.equals(account.getAci()) && pni.equals(account.getPni())) {
             return;
         }
