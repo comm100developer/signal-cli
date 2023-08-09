@@ -55,7 +55,8 @@ jobs:
           JAR_PREFIX=libsignal-client-
           jar_file=$(find ./signal-cli-*/lib/ -name "$JAR_PREFIX*.jar")
           jar_version=$(echo "$jar_file" | xargs basename | sed "s/$JAR_PREFIX//; s/.jar//")
-          echo "$jar_version"
+          echo "jar_file=${jar_file}"
+          echo "jar_version=${jar_version}"
           echo "signal_client_version=${jar_version}" >> $GITHUB_OUTPUT
 
       - name: Download signal-client builds
