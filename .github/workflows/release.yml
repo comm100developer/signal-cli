@@ -84,6 +84,7 @@ jobs:
         run: |
           mv signal_jni.dll libsignal_jni.so
           zip -u ./signal-cli-*/lib/libsignal-client-${SIGNAL_CLIENT_VER}.jar  ./libsignal_jni.so
+          echo "SIGNAL_CLIENT_VER=${SIGNAL_CLIENT_VER}"
           tar -czf signal-cli-${SIGNAL_CLI_VER}-Windows.tar.gz signal-cli-*/
 
       - name: Replace macOS lib
